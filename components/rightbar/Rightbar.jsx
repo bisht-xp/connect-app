@@ -1,18 +1,18 @@
 import Image from "next/image";
 import gift from "../../public/assets/gift.png";
-import ad from "../../public/assets/ad.png";
+import ad from "../../public/assets/ad.png"
+
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
 
-export default function Rightbar({ user }) {
+export default function Rightbar({ profile }) {
   const HomeRightbar = () => {
     return (
       <>
         <div className="flex items-center">
           <Image className="w-10 h-10 mr-3" src={gift} alt="gift" />
           <span className="font-roboto font-light text-base">
-            <b className="font-medium">Pola Foster</b> and{" "}
-            <b className="font-medium">3 other friends</b> have a birhday today.
+            <b className="font-medium">Pola Foster</b> and <b className="font-medium">3 other friends</b> have a birhday today.
           </span>
         </div>
         <Image className="w-full rounded-xl my-8" src={ad} alt="ad" />
@@ -33,17 +33,15 @@ export default function Rightbar({ user }) {
         <div className="mb-8">
           <div className="mb-3">
             <span className="font-medium mr-3 text-gray-800">City:</span>
-            <span className="font-light">{user.city}</span>
+            <span className="font-light">New York</span>
           </div>
           <div className="mb-3">
             <span className="font-medium mr-3 text-gray-800">From:</span>
-            <span className="font-light">{user.from}</span>
+            <span className="font-light">Madrid</span>
           </div>
           <div className="mb-3">
-            <span className="font-medium mr-3 text-gray-800">
-              Relationship:
-            </span>
-            <span className="font-light">{user.relationship}</span>
+            <span className="font-medium mr-3 text-gray-800">Relationship:</span>
+            <span className="font-light">Single</span>
           </div>
         </div>
         <h4 className="text-lg font-medium mb-3">User friends</h4>
@@ -115,7 +113,8 @@ export default function Rightbar({ user }) {
   return (
     <div className="basis-1/5">
       <div className="p-5">
-        {user ? <ProfileRightbar /> : <HomeRightbar />}
+        {profile ? <ProfileRightbar /> : <HomeRightbar />}
+        {/* <HomeRightbar /> */}
       </div>
     </div>
   );

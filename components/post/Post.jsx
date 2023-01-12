@@ -1,50 +1,35 @@
 import { MoreVert } from "@mui/icons-material";
-import { useState, useEffect } from "react";
-import Image from "next/legacy/image";
-import Link from "next/link";
-import axios from "axios";
-import { format } from "timeago.js";
-import avatar from "../../public/assets/person/noAvatar.png";
+import Image from "next/legacy/image"
+import { Users } from "../../dummyData";
+import { useState } from "react";
 import likes from "../../public/assets/like.png";
 import heart from "../../public/assets/heart.png";
 
 export default function Post({ post }) {
-  const [like, setLike] = useState(post.likes.length);
+  const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
-  const [user, setUser] = useState({});
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await axios.get(`/api/user?userId=${post.userId}`);
-      setUser(res.data);
-    };
-    fetchUser();
-  }, [post.userId]);
-
   return (
     <div className="w-full rounded-3xl ">
       <div className="p-3  my-8 shadow-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-          <Link href={`/profile/${user.username}`}>
-              <Image
-                className="w-8 h-8 rounded-full object-cover"
-                src={user.profilePicture || avatar}
-                width={32}
-                height={32}
-                alt={user.username}
-              />
-            </Link>
+            <Image
+              className="w-8 h-8 rounded-full object-cover"
+              src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+              width={32}
+              height={32}
+              alt="It's Your"
+            />
             <span className="text-base font-medium mx-3">
               {/* Angela safak */}
-              {user.username}
+              {Users.filter((u) => u.id === post?.userId)[0].username}
             </span>
-            <span className="text-xs">{format(post.createdAt)}</span>
+            <span className="text-xs">{post.date}</span>
           </div>
           <div className="cursor-pointer">
             <MoreVert />
@@ -52,19 +37,18 @@ export default function Post({ post }) {
         </div>
         <div className="my-5">
           <span className="font-roboto">{post?.desc}</span>
-          {post.img?.url && (
-            <div className="w-full h-96 md:h-500 relative mt-2">
-              {/* w-full h-96 md:h-500  */}
-              <Image
-                className="mt-5 w-full h-96 md:h-500"
-                src={post.img.url}
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority={true}
-              />
-            </div>
-          )}
+          <div className="w-full h-96 md:h-500 relative mt-2">
+          {/* w-full h-96 md:h-500  */}
+            <Image
+              className="mt-5 w-full h-96 md:h-500"
+              src={post.photo}
+              // width={400}
+              // height={400}
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
         </div>
         <div className="flex items-center justify-between mt-1">
           <div className="flex items-center">
