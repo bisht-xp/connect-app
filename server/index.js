@@ -9,8 +9,9 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 
 //dotenv
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config({ path: __dirname + "/../.env" });
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 //Router files imports
 const postsRouter = require("./routes/posts");
@@ -25,7 +26,7 @@ const handle = nextApp.getRequestHandler(); //part of next config
 
 // mongoose connections  configration
 mongoose.set("strictQuery", true);
-mongoose.connect(process.env.MONGO_URI, () => {
+mongoose.connect("mongodb://localhost:27017/social-app", () => {
   console.log("Connected to MongoDB");
 });
 
