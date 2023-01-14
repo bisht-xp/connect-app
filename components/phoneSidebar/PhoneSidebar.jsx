@@ -15,6 +15,7 @@ import {
 } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import person1 from "../../public/assets/person/1.jpeg";
+import Logout from "../logout/Logout";
 
 
 export default function PhoneSidebar() {
@@ -169,17 +170,7 @@ export default function PhoneSidebar() {
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
-              >
-                <span className="text-gray-600">
-                  <Badge badgeContent={null} color="error">
-                    <School className="h-5" />
-                  </Badge>
-                </span>
-                <span>Courses</span>
-              </a>
+               <Logout />
             </li>
           </ul>
         </div>
