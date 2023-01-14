@@ -18,19 +18,27 @@ router.route("/register").post(async (req, res) => {
   }
 });
 
-router.route("/login")
-  .post(
-    passport.authenticate("local", {
-      failureMessage: true,
-    }),
-    async (req, res) => {
-      try {
-        console.log(req.session);
-        res.json(req.user);
-      } catch (err) {
-        res.status(500).json(err);
-      }
+router.route("/login").post(
+  passport.authenticate("local", {
+    failureMessage: true,
+  }),
+  async (req, res) => {
+    try {
+      console.log(req.session);
+      res.json(req.user);
+    } catch (err) {
+      res.status(500).json(err);
     }
-  );
+  }
+);
+
+router.route("/logout").get((req, res) => {
+  // console.log(req.user);
+  req.logout(req.user, (err) => {
+    if (err) return next(err);
+    // req.flash("success", "Goodbye!");
+    res.redirect("/login");
+  });
+});
 
 module.exports = router;
