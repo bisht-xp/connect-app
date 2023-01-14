@@ -5,7 +5,7 @@ import router from "next/router";
 const AuthContext = createContext();
 
 export const getUser = async ({ req, res }) => {
-  console.log("req.user: ", req.user);
+  // console.log("req.user: ", req.user);
   try {
     if (req.user) {
       // console.log(response.data);
@@ -74,7 +74,7 @@ export const AuthProvider = (props) => {
     return await axios
       .get(`http://localhost:3000/api/auth/logout`, { withCredentials: true })
       .then(() => {
-        router.push("/");
+        router.push("/login");
         console.log("user logged out");
       })
       .catch((error) => {
