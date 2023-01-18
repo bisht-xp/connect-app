@@ -7,16 +7,18 @@ import { format } from "timeago.js";
 import avatar from "../../public/assets/person/noAvatar.png";
 import likes from "../../public/assets/like.png";
 import heart from "../../public/assets/heart.png";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
 
-  const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
-  };
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    setIsLiked(post.likes.includes(auth.user._id));
+  }, [auth.user._id, post.likes]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -25,6 +27,16 @@ export default function Post({ post }) {
     };
     fetchUser();
   }, [post.userId]);
+
+  const likeHandler = async () => {
+    try {
+       await axios.put(`/api/post/${post._id}/like`, { userId: auth.user._id });
+    } catch (err) {
+      console.log(err);
+    }
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
 
   return (
     <div className="w-full rounded-3xl ">
@@ -37,7 +49,7 @@ export default function Post({ post }) {
                 src={user.profilePicture || avatar}
                 width={32}
                 height={32}
-                alt="It's Your"
+                alt={user.username}
               />
             </Link>
             <span className="text-base font-medium mx-3">
