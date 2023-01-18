@@ -86,3 +86,17 @@ export default function Login() {
     </>
   );
 }
+
+export async function getServerSideProps({ req, res }) {
+  if (req.user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
