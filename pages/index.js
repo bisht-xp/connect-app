@@ -3,13 +3,11 @@ import Feed from "../components/feed/Feed";
 import Rightbar from "../components/rightbar/Rightbar";
 import Topbar from "../components/topbar/Topbar";
 import PhoneSidebar from "../components/phoneSidebar/PhoneSidebar";
-import { useAuth } from "../context/AuthContext";
+
 
 import axios from "axios";
 
-export default function Home({ data }) {
-  const { auth } = useAuth();
-  console.log(auth);
+export default function Home({ postData }) {
   return (
     <>
       <Head>
@@ -19,7 +17,7 @@ export default function Home({ data }) {
       <Topbar />
       <div className="flex min-w-full">
         <div className="hidden md:block ">{<PhoneSidebar />}</div>
-        <Feed posts={data} />
+        <Feed posts={postData} />
         <div className="hidden lg:block lg:basis-1/3">
           <Rightbar />
         </div>
@@ -28,12 +26,20 @@ export default function Home({ data }) {
   );
 }
 
-export const getServerSideProps = async () => {
-  const res = await axios.get(
-    `http://localhost:3000/api/post/timeline/63a5824362b001108fbe1f9d`
+export const getServerSideProps = async ({ req, res }) => {
+  if (!req.user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  const postTimeline = await axios.get(
+    `http://localhost:3000/api/post/timeline/${req.user._id}`
   );
-  const data = res.data;
+  const postData = postTimeline.data;
   return {
-    props: { data },
+    props: { postData },
   };
 };
