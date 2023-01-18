@@ -1,4 +1,5 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
+import Link from "next/link";
 import {
   Person,
   Notifications,
@@ -11,27 +12,32 @@ import {
   HelpOutline,
   WorkOutline,
   Event,
-  School,
 } from "@mui/icons-material";
 import { Badge } from "@mui/material";
-import person1 from "../../public/assets/person/1.jpeg";
+import noAvatar from "../../public/assets/person/noAvatar.png";
+import { useAuth } from "../../context/AuthContext";
 import Logout from "../logout/Logout";
 
-
 export default function PhoneSidebar() {
+  const { auth } = useAuth();
+
   return (
     <>
-      <div className="fixed overflow-y-auto scrollbar lg:basis-1/4 md:basis-1/3">
+      <div className={`fixed overflow-y-auto scrollbar`}>
         <div className="bg-white md:h-screen rounded p-7 shadow-lg">
           <div className="flex items-center space-x-4 p-2 mb-5">
-            <Image
-              className="w-12 h-12 rounded-full object-cover "
-              src={person1}
-              alt="James Bhatta"
-            />
+            <Link href={`/profile/${auth.user.username}`}>
+              <Image
+                className="w-12 h-12 rounded-full object-cover "
+                src={auth.user.profilePicture || noAvatar}
+                width={48}
+                height={48}
+                alt={auth.user.username || "image"}
+              />
+            </Link>
             <div>
               <h4 className="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide">
-                James Bhatta
+                {auth.user.username}
               </h4>
               <span className="text-sm tracking-wide flex items-center space-x-1">
                 <Verified htmlColor="green" fontSize="small" />
@@ -42,7 +48,7 @@ export default function PhoneSidebar() {
           <ul className="space-y-2 text-sm">
             <li>
               <a
-                href="#"
+                // href=""
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -53,7 +59,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href="#"
+                // href="#"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -66,7 +72,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href="#"
+                // href="#"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -79,7 +85,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href="#"
+                // href="#"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -105,7 +111,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href=""
+                // href=""
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className=" text-gray-600">
@@ -118,7 +124,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href="#"
+                // href="#"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -132,7 +138,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href="#"
+                // href="#"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -145,7 +151,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href="#"
+                // href="#"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -158,7 +164,7 @@ export default function PhoneSidebar() {
             </li>
             <li>
               <a
-                href="#"
+                // href="#"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -169,8 +175,8 @@ export default function PhoneSidebar() {
                 <span>Events</span>
               </a>
             </li>
-            <li>
-               <Logout />
+            <li className="mt-1">
+              <Logout />
             </li>
           </ul>
         </div>
