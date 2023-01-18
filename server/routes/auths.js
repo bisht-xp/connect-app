@@ -24,8 +24,7 @@ router.route("/login").post(
   }),
   async (req, res) => {
     try {
-      console.log(req.session);
-      res.json(req.user);
+      res.status(200).json("success");
     } catch (err) {
       res.status(500).json(err);
     }
