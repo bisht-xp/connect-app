@@ -13,7 +13,8 @@ export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
-
+  const [hydrated, setHydrated] = useState(false);
+  
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -27,6 +28,14 @@ export default function Post({ post }) {
     };
     fetchUser();
   }, [post.userId]);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  if (!hydrated) {
+    // Returns null on first render, so the client and server match
+    return null;
+  }
 
   const likeHandler = async () => {
     try {
