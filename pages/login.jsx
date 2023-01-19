@@ -17,7 +17,7 @@ export default function Login() {
     setIsFetching(true);
     event.preventDefault();
     login(email.current.value, password.current.value);
-    // setIsFetching(false);
+    setIsFetching(false);
   };
 
   return (

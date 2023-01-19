@@ -39,7 +39,9 @@ export const getServerSideProps = async (context) => {
     `http://localhost:3000/api/post/profile/${profile}`
   );
   const userData = resUser.data;
-  const postData = resPost.data;
+  const postData = resPost.data.sort((p1, p2) => {
+    return new Date(p2.createdAt) - new Date(p1.createdAt);
+  });
   return {
     props: { userData, postData },
   };

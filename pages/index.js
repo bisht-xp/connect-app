@@ -4,7 +4,6 @@ import Rightbar from "../components/rightbar/Rightbar";
 import Topbar from "../components/topbar/Topbar";
 import PhoneSidebar from "../components/phoneSidebar/PhoneSidebar";
 
-
 import axios from "axios";
 
 export default function Home({ postData }) {
@@ -38,7 +37,9 @@ export const getServerSideProps = async ({ req, res }) => {
   const postTimeline = await axios.get(
     `http://localhost:3000/api/post/timeline/${req.user._id}`
   );
-  const postData = postTimeline.data;
+  const postData = postTimeline.data.sort((p1, p2) => {
+    return new Date(p2.createdAt) - new Date(p1.createdAt);
+  });
   return {
     props: { postData },
   };
