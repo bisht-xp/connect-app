@@ -26,9 +26,10 @@ const handle = nextApp.getRequestHandler(); //part of next config
 
 // mongoose connections  configration
 mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://localhost:27017/social-app", () => {
-  console.log("Connected to MongoDB");
-});
+mongoose.connect("mongodb://localhost:27017/social-app", (err) => {
+  if(err) console.log(err) 
+  else console.log("mongdb is connected");
+ });
 
 nextApp.prepare().then(() => {
   // express code here
