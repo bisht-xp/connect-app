@@ -58,10 +58,7 @@ export default function PhoneSidebar() {
               </a>
             </li>
             <li>
-              <a
-                // href="#"
-                className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
-              >
+              <a className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline">
                 <span className="text-gray-600">
                   <Badge badgeContent={17} color="error">
                     <Notifications className="h-5" />
@@ -71,8 +68,8 @@ export default function PhoneSidebar() {
               </a>
             </li>
             <li>
-              <a
-                // href="#"
+              <Link
+                href="/messages"
                 className="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
               >
                 <span className="text-gray-600">
@@ -81,7 +78,7 @@ export default function PhoneSidebar() {
                   </Badge>
                 </span>
                 <span>Personal messages</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a
