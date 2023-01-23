@@ -17,6 +17,8 @@ require("dotenv").config({ path: __dirname + "/../.env" });
 const postsRouter = require("./routes/posts");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auths");
+const conversationRoute = require("./routes/conversations");
+const messageRoute = require("./routes/messages");
 
 //Part of server connection
 const dev = process.env.NODE_DEV !== "production";
@@ -27,9 +29,9 @@ const handle = nextApp.getRequestHandler(); //part of next config
 // mongoose connections  configration
 mongoose.set("strictQuery", true);
 mongoose.connect("mongodb://localhost:27017/social-app", (err) => {
-  if(err) console.log(err) 
+  if (err) console.log(err);
   else console.log("mongdb is connected");
- });
+});
 
 nextApp.prepare().then(() => {
   // express code here
@@ -72,6 +74,8 @@ nextApp.prepare().then(() => {
   app.use("/api/auth", authRouter);
   app.use("/api/post", postsRouter);
   app.use("/api/user", usersRouter);
+  app.use("/api/conversations", conversationRoute);
+  app.use("/api/messages", messageRoute);
 
   app.get("*", (req, res) => {
     return handle(req, res); // for all the react stuff
