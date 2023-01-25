@@ -3,10 +3,11 @@ import Feed from "../components/feed/Feed";
 import Rightbar from "../components/rightbar/Rightbar";
 import Topbar from "../components/topbar/Topbar";
 import PhoneSidebar from "../components/phoneSidebar/PhoneSidebar";
-
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home({ postData }) {
+  const {auth} = useAuth()
   return (
     <>
       <Head>
@@ -18,7 +19,7 @@ export default function Home({ postData }) {
         <div className="hidden md:block ">{<PhoneSidebar />}</div>
         <Feed posts={postData} />
         <div className="hidden lg:block lg:basis-1/3">
-          <Rightbar />
+          <Rightbar user={auth.user}/>
         </div>
       </div>
     </>
