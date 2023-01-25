@@ -2,6 +2,11 @@ const express = require("express");
 const next = require("next");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
 // passport Authentication
 const passport = require("passport");
@@ -20,6 +25,11 @@ const authRouter = require("./routes/auths");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 
+//connecting socket.io
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
+
 //Part of server connection
 const dev = process.env.NODE_DEV !== "production";
 const PORT = 3000; //process.env.PORT || 3000
@@ -35,7 +45,7 @@ mongoose.connect("mongodb://localhost:27017/social-app", (err) => {
 
 nextApp.prepare().then(() => {
   // express code here
-  const app = express();
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
@@ -81,8 +91,48 @@ nextApp.prepare().then(() => {
     return handle(req, res); // for all the react stuff
   });
 
-  app.listen(PORT, (err) => {
+  server.listen(PORT, (err) => {
     if (err) throw err;
     console.log(`ready at http://localhost:${PORT}`);
+  });
+
+  let users = [];
+
+  const addUser = (userId, socketId) => {
+    !users.some((user) => user.userId === userId) &&
+      users.push({ userId, socketId });
+  };
+
+  const removeUser = (socketId) => {
+    users = users.filter((user) => user.socketId !== socketId);
+  };
+
+  const getUser = (userId) => {
+    return users.find((user) => user.userId === userId);
+  };
+
+  io.on("connection", (socket) => {
+    // console.log("a user connected");
+    //take userId and socketId from user
+    socket.on("addUser", (userId) => {
+      addUser(userId, socket.id);
+      io.emit("getUsers", users);
+    });
+
+    //send and get message
+    socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+      const user = getUser(receiverId);
+      io.to(user.socketId).emit("getMessage", {
+        senderId,
+        text,
+      });
+    });
+
+    //when disconnect
+    socket.on("disconnect", () => {
+      // console.log("a user disconnected!");
+      removeUser(socket.id);
+      io.emit("getUsers", users);
+    });
   });
 });
