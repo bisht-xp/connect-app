@@ -14,19 +14,51 @@ import Chat from "../components/chat/Chat";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useRef, useState } from "react";
+import { io } from "socket.io-client";
 
 export default function messages({ conversationData }) {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [lastMessage, setLastMessage] = useState(null);
+  const socket = useRef();
   const scrollRef = useRef();
   const { auth } = useAuth();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:3000");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+
+  useEffect(() => {
+    socket.current.emit("addUser", auth.user._id);
+    socket.current.on("getUsers", (users) => {
+      setOnlineUsers(
+        auth.user.followings.filter((f) => users.some((u) => u.userId === f))
+      );
+    });
+  }, [auth.user]);
 
   useEffect(() => {
     const getMessages = async () => {
       try {
         const res = await axios.get(`/api/messages/${currentChat?._id}`);
         setMessages(res.data);
+        setLastMessage(messages[messages.length - 1]);
       } catch (err) {
         console.log(err);
       }
@@ -36,12 +68,23 @@ export default function messages({ conversationData }) {
 
   const clickHandler = async (event) => {
     event.preventDefault();
+
     if (newMessage.trim().length !== 0) {
       const message = {
         sender: auth.user._id,
         text: newMessage,
         conversationId: currentChat._id,
       };
+
+      const receiverId = currentChat.members.find(
+        (member) => member !== auth.user._id
+      );
+
+      socket.current.emit("sendMessage", {
+        senderId: auth.user._id,
+        receiverId,
+        text: newMessage,
+      });
 
       try {
         const res = await axios.post("/api/messages", message);
@@ -74,7 +117,12 @@ export default function messages({ conversationData }) {
               <div className="contacts p-2 flex-1 scrollbar overflow-y-scroll">
                 {conversationData.map((conv) => (
                   <div onClick={() => setCurrentChat(conv)} key={conv._id}>
-                    <Conversation conversation={conv} currentUser={auth.user} />
+                    <Conversation
+                      conversation={conv}
+                      currentUser={auth.user}
+                      onlineUsers={onlineUsers}
+                      messages={lastMessage}
+                    />
                   </div>
                 ))}
               </div>
@@ -126,7 +174,7 @@ export default function messages({ conversationData }) {
                             className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-200 bg-gray-200 focus:bg-white focus:outline-none text-gray-600 focus:shadow-md transition duration-300 ease-in"
                             type="text"
                             placeholder="Aa"
-                            vlaue={newMessage}
+                            value={newMessage}
                             onChange={(event) =>
                               setNewMessage(event.target.value)
                             }
