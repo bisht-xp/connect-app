@@ -41,8 +41,9 @@ module.exports.updatePost = async (req, res) => {
 
 module.exports.deletePost = async (req, res) => {
   const post = await Post.findById(req.params.id);
-  if (post.userId === req.body.userId) {
+  if (post.userId === req.body._id) {
     try {
+      await cloudinary.uploader.destroy(req.user.img.filename);
       await post.deleteOne();
       res.status(200).json("sccuessfully deleted post");
     } catch (err) {
