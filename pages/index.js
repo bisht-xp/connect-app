@@ -1,13 +1,13 @@
 import Head from "next/head";
-import Feed from "../components/feed/Feed";
-import Rightbar from "../components/rightbar/Rightbar";
-import Topbar from "../components/topbar/Topbar";
-import PhoneSidebar from "../components/phoneSidebar/PhoneSidebar";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import Feed from "../components/feed/Feed";
+import Topbar from "../components/topbar/Topbar";
+import LeftMenu from "../components/leftMenu/LeftMenu";
+import RightMenu from "../components/rightMenu/RightMenu";
+
 
 export default function Home({ postData }) {
-  const {auth} = useAuth()
+  
   return (
     <>
       <Head>
@@ -15,12 +15,12 @@ export default function Home({ postData }) {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <Topbar />
-      <div className="flex min-w-full">
-        <div className="hidden md:block ">{<PhoneSidebar />}</div>
-        <Feed posts={postData} />
-        <div className="hidden lg:block lg:basis-1/3">
-          <Rightbar user={auth.user}/>
+      <div className="flex justify-center h-screen">
+        <LeftMenu />
+        <div className="w-full lg:w-2/3 xl:w-2/5 pt-32 lg:pt-16 px-2">
+          <Feed posts={postData} />
         </div>
+        <RightMenu />
       </div>
     </>
   );
@@ -38,6 +38,7 @@ export const getServerSideProps = async ({ req, res }) => {
   const postTimeline = await axios.get(
     `http://localhost:3000/api/post/timeline/${req.user._id}`
   );
+  
   const postData = postTimeline.data.sort((p1, p2) => {
     return new Date(p2.createdAt) - new Date(p1.createdAt);
   });
