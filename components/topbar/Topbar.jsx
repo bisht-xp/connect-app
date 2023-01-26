@@ -1,62 +1,167 @@
-import { useState } from "react";
 import Link from "next/link";
-import PhoneSidebar from "../phoneSidebar/PhoneSidebar";
-
-import {Search, JoinFull} from "@mui/icons-material";
+import Image from "next/legacy/image";
+import {
+  Search,
+  JoinFull,
+  Message,
+  DarkMode,
+  Home,
+  Group,
+  ViewComfy,
+  Storefront,
+  CircleNotifications,
+  Menu,
+} from "@mui/icons-material";
+import { Badge } from "@mui/material";
+import { useAuth } from "../../context/AuthContext";
+import noAvatar from "../../public/assets/person/noAvatar.png";
+import SignOut from "../logout/Logout";
 
 export default function Topbar() {
-
-  const [collapse, setCollapse] = useState(false);
-
-  const collapseHandler = () => {
-    setCollapse(!collapse);
-  };
+  const { auth } = useAuth();
   return (
     <>
-      <nav className="flex flex-row md:p-3 lg:p-2 items-center justify-around min-w-full sticky z-50 top-0 md:justify-around flex-wrap bg-blue-600 p-3">
-          <div className="block md:hidden">
-            <button
-              onClick={collapseHandler}
-              className="flex justify-around px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
-            >
-              <svg
-                className="fill-current h-3 w-3"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-              </svg>
-            </button>
-          </div>
-        <div className="basis-1/12 text-white md:mr-2">
-          <Link href="/" className="flex ">
-            <JoinFull fontSize="large" />
-            <span className="hidden  font-semibold text-2xl pl-1 tracking-tight md:block">
+      <nav className="bg-white dark:bg-dark-second h-max md:h-14 w-full shadow flex flex-col md:flex-row items-center justify-center md:justify-between fixed top-0 z-50 border-b dark:border-dark-third">
+        {/* <!-- LEFT NAV --> */}
+        <div className="flex items-center justify-between w-full md:w-max px-4 py-2">
+          <Link href="/" className="mr-2 hidden md:inline-block">
+            {/* <img
+              src="./images/fb-logo.png"
+              alt="Facebook logo"
+              className="w-24 sm:w-20 lg:w-10 h-auto"
+            /> */}
+            <JoinFull className="w-24 sm:w-20 lg:w-10 h-auto text-blue-500" />
+          </Link>
+          <Link href="/" className="inline-block md:hidden">
+            {/* <img src="./images/fb-logo-mb.png" alt="" className="w-32 h-auto" />
+            <img src="./images/fb-logo-mb.png" alt="" className="w-32 h-auto" /> */}
+            <span className="w-36 h-auto text-blue-500 font-bold font-roboto">
               Connect
             </span>
           </Link>
+          <div className="flex items-center justify-between space-x-1">
+            <div className="relative bg-gray-100 dark:bg-dark-third px-2 py-2 w-10 h-10 sm:w-11 sm:h-11 lg:h-10 lg:w-10 xl:w-max xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer">
+              <Search />
+              <input
+                type="text"
+                placeholder="Search Facebook"
+                className="outline-none bg-transparent hidden xl:inline-block"
+              />
+            </div>
+            <div className="text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt">
+              <DarkMode />
+            </div>
+            <div
+              className="text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt"
+              // darkMood={dark}
+            >
+              <SignOut />
+            </div>
+          </div>
         </div>
-        <div className="relative group lg:basis-1/2 md:basis-1/2 md:mx-0">
-          <Search
-            className="absolute left-2 top-1/2 -mt-2.5 pointer-events-nonegroup-focus-within:text-blue-500"
-            aria-hidden="true"
-          />
-          <input
-            className="mx-1 focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
-            type="text"
-            aria-label="Filter projects"
-            placeholder="Filter projects..."
-          />
-        </div>
+        {/* <!-- END LEFT NAV --> */}
+
+        {/* <!-- MAIN NAV --> */}
+        <ul className="flex w-full lg:w-max items-center justify-center">
+          <li className="w-1/5 md:w-max text-center">
+            <Link
+              href="/"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block text-blue-500 border-b-4 border-blue-500"
+            >
+              <Home />
+            </Link>
+          </li>
+          <li className="w-1/5 md:w-max text-center">
+            <Link
+              href="/messages"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
+            >
+              <Badge badgeContent={8} color="error">
+                <Message />
+              </Badge>
+            </Link>
+          </li>
+          <li className="w-1/5 md:w-max text-center">
+            <Link
+              href="#"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
+            >
+              <Storefront />
+            </Link>
+          </li>
+          <li className="w-1/5 md:w-max text-center">
+            <Link
+              href="#"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
+            >
+              <Badge badgeContent={null} color="error">
+                <Group />
+              </Badge>
+            </Link>
+          </li>
+          <li className="w-1/5 md:w-max text-center hidden md:inline-block">
+            <Link
+              href="#"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
+            >
+              <Badge badgeContent={100} color="error">
+                <ViewComfy />
+              </Badge>
+            </Link>
+          </li>
+          <li className="w-1/5 md:w-max text-center inline-block md:hidden">
+            <Link
+              href="#"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
+            >
+              <Menu />
+            </Link>
+          </li>
+        </ul>
+        {/* <!-- END MAIN NAV --> */}
+
+        {/* <!-- RIGHT NAV --> */}
+        <ul className="hidden md:flex mx-4 items-center justify-center">
+          <li className="h-full hidden xl:flex">
+            <Link
+              href={`/profile/${auth.user.username}`}
+              className="inline-flex items-center justify-center p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-third mx-1"
+            >
+              <Image
+                className="h-7 w-7 rounded-full object-cover"
+                src={auth.user.profilePicture || noAvatar}
+                width={28}
+                height={28}
+                alt={auth.user.username || "image"}
+              />
+              <span className="mx-2 font-semibold dark:text-dark-txt">
+                {auth.user.username}
+              </span>
+            </Link>
+          </li>
+          <li>
+            <div className="xl:grid hidden place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
+              <Badge badgeContent={9} color="error">
+                <CircleNotifications />
+              </Badge>
+            </div>
+          </li>
+          <li>
+            <div
+              className="grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative"
+              // darkMood={dark}
+            >
+              <DarkMode />
+            </div>
+          </li>
+          <li>
+            <div className="xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
+              <SignOut />
+            </div>
+          </li>
+        </ul>
+        {/* <!-- END RIGHT NAV --> */}
       </nav>
-        <div
-          className={`${
-            collapse ? "block " : "hidden "
-          } fixed overflow-auto z-10 basis-1/5`}
-        >
-          <PhoneSidebar />
-        </div>
     </>
   );
 }

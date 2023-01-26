@@ -17,7 +17,6 @@ export default function Share() {
   const router = useRouter();
   const desc = useRef();
   const [file, setFile] = useState(null);
-  
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -34,12 +33,12 @@ export default function Share() {
       console.log(err);
     }
   };
-
+  // md:min-w-min rounded-xl shadow-lg bg-white
   return (
     <>
-      <div className="md:min-w-min rounded-xl shadow-lg">
+      <div className="px-4 mt-4 shadow rounded-lg bg-white dark:bg-dark-second">
         <div className="p-3">
-          <div className="flex items-center">
+          <div className="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4 mb-3">
             <Image
               className="rounded-full object-cover"
               src={auth.user.profilePicture || noAvatar}
@@ -56,7 +55,6 @@ export default function Share() {
               className="ml-3 border-none focus:outline-none w-4/5"
             />
           </div>
-          <hr className="m-5" />
           {file && (
             <div className="px-5 pb-3 relative">
               <img
@@ -70,62 +68,44 @@ export default function Share() {
               />
             </div>
           )}
-          <form className="md:flex md:justify-around" onSubmit={submitHandler}>
-            <div className="flex  mr-5">
-              <label
-                htmlFor="image"
-                className="flex items-center mr-5 cursor-pointer"
-              >
-                <PermMedia
-                  htmlColor="tomato"
-                  sx={{ fontSize: 20 }}
-                  className="mr-1"
-                />
-                <span className="font-medium font-roboto text-sm">
-                  Photo & Video
-                </span>
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  className="hidden"
-                  onChange={(e) => setFile(e.target.files[0])}
-                />
-              </label>
-              <div className="flex items-center mr-5 cursor-pointer">
-                <Label
-                  htmlColor="blue"
-                  sx={{ fontSize: 20 }}
-                  className="mr-1"
-                />
-                <span className="font-medium font-roboto text-sm">Tag</span>
-              </div>
-              <div className="flex items-center mr-5 cursor-pointer">
-                <Room
-                  htmlColor="green"
-                  sx={{ fontSize: 20 }}
-                  className="mr-1"
-                />
-                <span className="font-medium font-roboto text-sm">
-                  Location
-                </span>
-              </div>
-              <div className="flex items-center mr-5 cursor-pointer">
-                <EmojiEmotions
-                  htmlColor="goldenrod"
-                  sx={{ fontSize: 20 }}
-                  className="mr-1"
-                />
-                <span className="font-medium font-roboto text-sm">
-                  Feelings
-                </span>
-              </div>
+          <form className="flex md:justify-around" onSubmit={submitHandler}>
+            {/* <div className="p-2 flex"> */}
+            <label
+              htmlFor="image"
+              className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer ml-0"
+            >
+              <PermMedia htmlColor="tomato" sx={{ fontSize: 20 }} />
+              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">
+                Photo
+              </span>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                className="hidden"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </label>
+            <div className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer">
+              <Room htmlColor="green" sx={{ fontSize: 20 }} />
+              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">
+                Location
+              </span>
             </div>
+            <div className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer">
+              <EmojiEmotions htmlColor="goldenrod" sx={{ fontSize: 20 }} />
+              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">
+                Feelings
+              </span>
+            </div>
+            {/* </div> */}
             <button
               type="submit"
-              className="ml-64 md:ml-0 border-none py-2 px-3 mt-1 rounded-md bg-green-600 font-medium mr-5 cursor-pointer text-white"
+              className="w-1/3 flex  justify-center items-center dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer bg-green-600"
             >
-              Share
+              <span className="text-xs sm:text-sm font-semibold text-white dark:text-dark-txt">
+                Share
+              </span>
             </button>
           </form>
         </div>
