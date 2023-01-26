@@ -25,11 +25,6 @@ const authRouter = require("./routes/auths");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 
-//connecting socket.io
-io.on("connection", (socket) => {
-  console.log("a user connected");
-});
-
 //Part of server connection
 const dev = process.env.NODE_DEV !== "production";
 const PORT = 3000; //process.env.PORT || 3000
