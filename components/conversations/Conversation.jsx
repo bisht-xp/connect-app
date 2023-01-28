@@ -24,7 +24,7 @@ export default function Conversation({
     };
     getUser();
   }, [currentUser, conversation]);
-  console.log(messages);
+  // console.log(messages);
 
   return (
     <>
