@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Topbar from "../../components/topbar/Topbar";
 import Feed from "../../components/feed/Feed";
-import Rightbar from "../../components/rightbar/Rightbar";
-import PhoneSidebar from "../../components/phoneSidebar/PhoneSidebar";
-import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 import axios from "axios";
+import LeftMenu from "../../components/leftMenu/LeftMenu";
+import ProfileInfo from "../../components/profileInfo/ProfileInfo";
+import ProfileRightMenu from "../../components/profileRightMenu/ProfileRightMenu";
 
 export default function Profile({ userData, postData }) {
   return (
@@ -14,7 +14,7 @@ export default function Profile({ userData, postData }) {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <Topbar />
-      <div className="flex w-full">
+      {/* <div className="flex w-full">
         <div className="hidden md:block lg:block">{<PhoneSidebar />}</div>
         <div className="w-full ">
           <ProfileInfo user={userData} />
@@ -25,6 +25,14 @@ export default function Profile({ userData, postData }) {
             </div>
           </div>
         </div>
+      </div> */}
+      <div className="flex justify-center h-screen">
+        <LeftMenu />
+        <div className="w-full lg:w-2/3 xl:w-2/5 pt-32 lg:pt-16 px-2">
+          <ProfileInfo user={userData}/>
+          <Feed posts={postData} username={userData.username} />
+        </div>
+        <ProfileRightMenu />
       </div>
     </>
   );
