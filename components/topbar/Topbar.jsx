@@ -13,29 +13,24 @@ import {
   Menu,
 } from "@mui/icons-material";
 import { Badge } from "@mui/material";
+import { useRouter } from "next/router";
 import { useAuth } from "../../context/AuthContext";
 import noAvatar from "../../public/assets/person/noAvatar.png";
 import SignOut from "../logout/Logout";
 
 export default function Topbar() {
   const { auth } = useAuth();
+  const router = useRouter();
   return (
     <>
       <nav className="bg-white dark:bg-dark-second h-max md:h-14 w-full shadow flex flex-col md:flex-row items-center justify-center md:justify-between fixed top-0 z-50 border-b dark:border-dark-third">
         {/* <!-- LEFT NAV --> */}
         <div className="flex items-center justify-between w-full md:w-max px-4 py-2">
           <Link href="/" className="mr-2 hidden md:inline-block">
-            {/* <img
-              src="./images/fb-logo.png"
-              alt="Facebook logo"
-              className="w-24 sm:w-20 lg:w-10 h-auto"
-            /> */}
             <JoinFull className="w-24 sm:w-20 lg:w-10 h-auto text-blue-500" />
           </Link>
           <Link href="/" className="inline-block md:hidden">
-            {/* <img src="./images/fb-logo-mb.png" alt="" className="w-32 h-auto" />
-            <img src="./images/fb-logo-mb.png" alt="" className="w-32 h-auto" /> */}
-            <span className="w-36 h-auto text-blue-500 font-bold font-roboto">
+            <span className="w-36 h-auto text-blue-500 text-lg font-bold font-roboto">
               Connect
             </span>
           </Link>
@@ -51,30 +46,24 @@ export default function Topbar() {
             <div className="text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt">
               <DarkMode />
             </div>
-            <div
-              className="text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt"
-              // darkMood={dark}
-            >
+            <div className="text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt">
               <SignOut />
             </div>
           </div>
         </div>
-        {/* <!-- END LEFT NAV --> */}
-
-        {/* <!-- MAIN NAV --> */}
         <ul className="flex w-full lg:w-max items-center justify-center">
-          <li className="w-1/5 md:w-max text-center">
+          <li className={router.asPath == "/"? `w-1/5 md:w-max text-center text-blue-500`: "w-1/5 md:w-max text-center"}>
             <Link
               href="/"
-              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block text-blue-500 border-b-4 border-blue-500"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block  border-b-4 "
             >
               <Home />
             </Link>
           </li>
-          <li className="w-1/5 md:w-max text-center">
+          <li className={router.asPath == "/messages"? `w-1/5 md:w-max text-center text-blue-500`: "w-1/5 md:w-max text-center"}>
             <Link
               href="/messages"
-              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
+              className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
             >
               <Badge badgeContent={8} color="error">
                 <Message />
