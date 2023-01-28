@@ -110,7 +110,7 @@ export default function messages({ conversationData }) {
         <div className="flex-1 flex flex-col">
           <Topbar />
           <main className="flex-grow flex flex-row min-h-0">
-            <section className="flex flex-col flex-none overflow-auto w-24 lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out">
+            <section className="flex flex-col flex-none overflow-auto mt-16 md:mt-14  w-24 lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out">
               <div className="header p-4 flex flex-row justify-between items-center flex-none">
                 <p className="text-md font-bold hidden md:block">Messenger</p>
               </div>
@@ -127,7 +127,7 @@ export default function messages({ conversationData }) {
                 ))}
               </div>
             </section>
-            <section className="flex flex-col flex-auto border-l">
+            <section className="flex flex-col flex-auto border-l mt-102 md:mt-12">
               {currentChat ? (
                 <>
                   <Message currentChat={currentChat} />
@@ -146,25 +146,25 @@ export default function messages({ conversationData }) {
                     <div className="flex flex-row items-center p-4">
                       <button
                         type="button"
-                        className="flex flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <AddCircle />
                       </button>
                       <button
                         type="button"
-                        className="flex flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <Photo />
                       </button>
                       <button
                         type="button"
-                        className="flex flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <PhotoCamera />
                       </button>
                       <button
                         type="button"
-                        className="flex flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <Mic />
                       </button>
@@ -190,7 +190,7 @@ export default function messages({ conversationData }) {
                       </div>
                       <button
                         type="button"
-                        className="flex flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <ThumbUp />
                       </button>
@@ -198,7 +198,7 @@ export default function messages({ conversationData }) {
                   </div>
                 </>
               ) : (
-                <span className="  text-5xl text-gray-200 p-10 cursor-default flex-1">
+                <span className="  text-5xl text-gray-200 py-10 pl-6 md:p-10 md:mt-0 mt-32 cursor-default flex-1">
                   Open a conversation to start a chat.
                 </span>
               )}
