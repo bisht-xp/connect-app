@@ -5,9 +5,7 @@ import Topbar from "../components/topbar/Topbar";
 import LeftMenu from "../components/leftMenu/LeftMenu";
 import RightMenu from "../components/rightMenu/RightMenu";
 
-
 export default function Home({ postData }) {
-  
   return (
     <>
       <Head>
@@ -38,7 +36,7 @@ export const getServerSideProps = async ({ req, res }) => {
   const postTimeline = await axios.get(
     `http://localhost:3000/api/post/timeline/${req.user._id}`
   );
-  
+
   const postData = postTimeline.data.sort((p1, p2) => {
     return new Date(p2.createdAt) - new Date(p1.createdAt);
   });
