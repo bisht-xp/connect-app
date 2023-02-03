@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
+const ProfileSchema = Schema({
+  url: String,
+  filename: String,
+});
+
+const ImageSchema = Schema({
+  url: String,
+  filename: String,
+});
+
 const UserSchema = new Schema(
   {
     email: {
@@ -15,14 +25,8 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
-    profilePicture: {
-      type: String,
-      default: "",
-    },
-    coverPicture: {
-      type: String,
-      default: "",
-    },
+    profilePicture: ProfileSchema,
+    coverPicture: ImageSchema,
     followers: {
       type: Array,
       default: [],

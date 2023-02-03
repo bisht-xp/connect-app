@@ -1,14 +1,15 @@
 const Post = require("../models/post");
 const User = require("../models/user");
+const { cloudinary } = require("../cloudinary/index");
 
 module.exports.createPost = async (req, res) => {
   try {
     const post = new Post(req.body);
     post.userId = req.user._id;
     post.img = {
-      url:req.file.path,
-      filename: req.file.filename
-    }
+      url: req.file.path,
+      filename: req.file.filename,
+    };
     const savedPost = await post.save();
     res.json(savedPost);
   } catch (err) {
@@ -41,9 +42,11 @@ module.exports.updatePost = async (req, res) => {
 
 module.exports.deletePost = async (req, res) => {
   const post = await Post.findById(req.params.id);
-  if (post.userId === req.body._id) {
+  if (post.userId === req.body.currentUserId) {
     try {
-      await cloudinary.uploader.destroy(req.user.img.filename);
+      if (post.img) {
+        await cloudinary.uploader.destroy(post.img.filename);
+      }
       await post.deleteOne();
       res.status(200).json("sccuessfully deleted post");
     } catch (err) {

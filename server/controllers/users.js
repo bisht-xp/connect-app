@@ -3,10 +3,40 @@ const User = require("../models/user");
 module.exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findByIdAndUpdate(id, { $set: req.body });
+    // console.log("req.data", req.data);
+    // console.log("req: ", req);
+    // const user = await User.findByIdAndUpdate(id, { $set: req.body });
+    const user = await User.findById(id);
+    // const { desc, city, relationship } = req.body;
+    // console.log(desc, city, relationship);
+    // console.log("user: ", user);
+    if (req.body.desc) {
+      user.desc = req.body.desc;
+    }
+    if (req.body.city) {
+      user.city = req.body.city;
+    }
+    if (req.body.relationship) {
+      user.relationship = req.body.relationship;
+    }
+    if (req.files.profile) {
+      console.log("profilePicture", req.files.profile[0]);
+      user.profilePicture = {
+        url: req.files.profile[0].path,
+        filename: req.files.profile[0].filename,
+      };
+    }
+    if (req.files.coverPicture) {
+      console.log("CoverPicture", req.files.coverPicture[0]);
+      user.coverPicture = {
+        url: req.files.coverPicture[0].path,
+        filename: req.files.coverPicture[0].filename,
+      };
+    }
     if (req.body.password) {
       await user.setPassword(req.body.password);
     }
+
     await user.save();
     res.status(200).json({ message: "Successful!" });
   } catch (err) {
