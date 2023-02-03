@@ -29,7 +29,7 @@ export default function Profile({ userData, postData }) {
       <div className="flex justify-center h-screen">
         <LeftMenu />
         <div className="w-full lg:w-2/3 xl:w-2/5 pt-32 lg:pt-16 px-2">
-          <ProfileInfo user={userData}/>
+          <ProfileInfo user={userData} />
           <Feed posts={postData} username={userData.username} />
         </div>
         <ProfileRightMenu />
@@ -38,8 +38,16 @@ export default function Profile({ userData, postData }) {
   );
 }
 
-export const getServerSideProps = async (context) => {
-  const { profile } = context.params;
+export const getServerSideProps = async ({ req, res, params }) => {
+  if (!req.user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  const { profile } = params;
   const resUser = await axios.get(
     `http://localhost:3000/api/user/?username=${profile}`
   );
