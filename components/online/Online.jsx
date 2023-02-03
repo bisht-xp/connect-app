@@ -20,6 +20,8 @@ export default function Online({ onlineUsers }) {
     setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
   }, [friends, onlineUsers]);
 
+  
+
   return (
     <>
       {onlineFriends.map((friend) => (

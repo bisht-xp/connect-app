@@ -32,7 +32,7 @@ export default function Conversation({
         <div className="w-16 h-16 relative flex flex-shrink-0">
           <Image
             className="shadow-md rounded-full w-full h-full object-cover"
-            src={user.profilePicture || avatar}
+            src={user.profilePicture?.url || avatar}
             layout="fill"
             alt={user.username}
           />
