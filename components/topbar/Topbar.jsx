@@ -118,7 +118,7 @@ export default function Topbar() {
             >
               <Image
                 className="h-7 w-7 rounded-full object-cover"
-                src={auth.user.profilePicture || noAvatar}
+                src={auth.user.profilePicture?.url || noAvatar}
                 width={28}
                 height={28}
                 alt={auth.user.username || "image"}

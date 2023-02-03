@@ -30,7 +30,7 @@ export default function Share() {
       setFile(null);
       desc.current.value = "";
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
     }
   };
   // md:min-w-min rounded-xl shadow-lg bg-white
@@ -41,7 +41,7 @@ export default function Share() {
           <div className="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4 mb-3">
             <Image
               className="rounded-full object-cover"
-              src={auth.user.profilePicture || noAvatar}
+              src={auth.user.profilePicture?.url || noAvatar}
               alt={auth.user.username || "image"}
               width={56}
               height={56}

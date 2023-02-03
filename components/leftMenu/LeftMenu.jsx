@@ -22,7 +22,7 @@ export default function LeftMenu() {
               /> */}
               <Image
                 className="w-10 h-10 rounded-full object-cover "
-                src={auth.user.profilePicture || noAvatar}
+                src={auth.user.profilePicture?.url || noAvatar}
                 width={40}
                 height={40}
                 alt={auth.user.username || "image"}

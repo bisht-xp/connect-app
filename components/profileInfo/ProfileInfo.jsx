@@ -6,11 +6,13 @@ import { useState } from "react";
 import axios from "axios";
 import { Edit, Textsms } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import UpdateModal from "../updateModal/UpdateModal";
 
 export default function ProfileInfo({ user }) {
-  const router = useRouter()
+  const router = useRouter();
   const { auth } = useAuth();
 
+  const [editModal, setEditModal] = useState(false);
   const [followed, setFollowed] = useState(
     auth.user.followings.includes(user?._id)
   );
@@ -31,30 +33,35 @@ export default function ProfileInfo({ user }) {
       console.log(err);
     }
   };
+  const closeAndOutSideHandler = () => {
+    setEditModal(false);
+  };
 
   const messageClick = async () => {
-
-    try{
-      const res = await axios.get(`/api/conversations/find/${auth.user._id}/${user._id}`);
-      if(!res.data) {
+    try {
+      const res = await axios.get(
+        `/api/conversations/find/${auth.user._id}/${user._id}`
+      );
+      if (!res.data) {
         const newConversation = {
           senderId: auth.user._id,
-          receiverId: user._id
-        }
+          receiverId: user._id,
+        };
         await axios.post(`/api/conversations/`, newConversation);
       }
-      router.push('/messages');
+      router.push("/messages");
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
   return (
     <>
       <div>
         <div className="relative w-full h-48">
           <Image
             className="w-full h-48 object-cover"
-            src={user.coverPicture || noCover}
+            src={user.coverPicture?.url || noCover}
             alt="cover Picture"
             layout="fill"
             objectFit="cover"
@@ -69,7 +76,7 @@ export default function ProfileInfo({ user }) {
                 <div className="rounded-full relative w-32 h-32">
                   <Image
                     className="md rounded-full border-4 border-gray-900"
-                    src={user.profilePicture || noAvatar}
+                    src={user.profilePicture?.url || noAvatar}
                     alt="profile picture"
                     layout="fill"
                     objectFit="cover"
@@ -82,11 +89,17 @@ export default function ProfileInfo({ user }) {
             {/* <!-- Follow Button --> */}
             {user.username === auth.user.username && (
               <div className="flex flex-col text-right">
-                <button className="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                <button
+                  className="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
+                  onClick={() => {
+                    setEditModal(true);
+                  }}
+                >
                   <Edit />
                 </button>
               </div>
             )}
+            {editModal && <UpdateModal closeHandler={closeAndOutSideHandler} />}
           </div>
 
           {/* <!-- Profile info --> */}

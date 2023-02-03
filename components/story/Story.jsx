@@ -12,7 +12,7 @@ export default function Story() {
           <div className="relative h-full group cursor-pointer">
             <Image
               className="group-hover:transform group-hover:scale-110 transition-all duration-700 "
-              src={auth.user.profilePicture || noAvatar}
+              src={auth.user.profilePicture?.url || noAvatar}
               layout="fill"
               objectFit="cover"
               alt={auth.user.username || "image"}
@@ -42,7 +42,7 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture || noAvatar}
+                src={auth.user.profilePicture?.url || noAvatar}
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"
@@ -65,7 +65,7 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture || noAvatar}
+                src={auth.user.profilePicture?.url || noAvatar}
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"
@@ -88,7 +88,7 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture || noAvatar}
+                src={auth.user.profilePicture?.url || noAvatar}
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"
@@ -111,7 +111,7 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture || noAvatar}
+                src={auth.user.profilePicture?.url || noAvatar}
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"

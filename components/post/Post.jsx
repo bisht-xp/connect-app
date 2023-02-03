@@ -1,9 +1,4 @@
-import {
-  Comment,
-  Favorite,
-  MoreVert,
-  Share,
-} from "@mui/icons-material";
+import { Comment, Favorite, MoreVert, Share } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
@@ -11,10 +6,12 @@ import axios from "axios";
 import { format } from "timeago.js";
 import avatar from "../../public/assets/person/noAvatar.png";
 import { useAuth } from "../../context/AuthContext";
+import PostModal from "../postModal/PostModal";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
   const [user, setUser] = useState({});
   const [hydrated, setHydrated] = useState(false);
 
@@ -50,6 +47,10 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
+  const postHandler = () => {
+    setDropDown(!dropDown);
+  };
+
   return (
     <>
       <div className="shadow bg-white dark:bg-dark-second dark:text-dark-txt mt-4 rounded-lg">
@@ -64,7 +65,7 @@ export default function Post({ post }) {
               <Link href={`/profile/${user.username}`}>
                 <Image
                   className="w-10 h-10 rounded-full object-cover"
-                  src={user.profilePicture || avatar}
+                  src={user.profilePicture?.url || avatar}
                   width={40}
                   height={40}
                   alt="image"
@@ -79,7 +80,10 @@ export default function Post({ post }) {
             </div>
           </div>
           <div className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer">
-            <MoreVert />
+            <MoreVert onClick={postHandler} />
+            <div className="relative">
+              {dropDown && <PostModal post={post} />}
+            </div>
           </div>
         </div>
         <div>
@@ -110,7 +114,10 @@ export default function Post({ post }) {
             <div className="flex space-x-2">
               <div className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
                 {/* <span className={isLiked? "text-red-500": null}> */}
-                  <Favorite onClick={likeHandler} className={isLiked? "text-red-500": null} />
+                <Favorite
+                  onClick={likeHandler}
+                  className={isLiked ? "text-red-500" : null}
+                />
                 {/* </span> */}
                 <span className="text-sm font-semibold">Like</span>
               </div>
