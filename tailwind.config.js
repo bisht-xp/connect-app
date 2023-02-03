@@ -6,12 +6,16 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        102: '102px',
+        102: "102px",
       },
       fontFamily: {
-        roboto:['Roboto', "sans-serif"]
-      }
+        roboto: ["Roboto", "sans-serif"],
+      },
+      colors: {
+        socialBg: "#F5F7FB",
+        socialBlue: "#218DFA",
+      },
     },
   },
   plugins: [],
-}
+};
