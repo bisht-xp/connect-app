@@ -3,13 +3,7 @@ const User = require("../models/user");
 module.exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    // console.log("req.data", req.data);
-    // console.log("req: ", req);
-    // const user = await User.findByIdAndUpdate(id, { $set: req.body });
     const user = await User.findById(id);
-    // const { desc, city, relationship } = req.body;
-    // console.log(desc, city, relationship);
-    // console.log("user: ", user);
     if (req.body.desc) {
       user.desc = req.body.desc;
     }
@@ -128,6 +122,15 @@ module.exports.getFriends = async (req, res) => {
       friendList.push({ _id, username, profilePicture });
     });
     res.status(200).json(friendList);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+module.exports.getAllUser = async (req, res) => {
+  try {
+    const user = await User.find();
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json(err);
   }

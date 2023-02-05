@@ -27,4 +27,6 @@ router.route("/:id/follow").put(Users.followUser);
 // Unfollow a User
 router.route("/:id/unfollow").put(Users.unfollowUser);
 
+router.route("/alluser").get(Users.getAllUser);
+
 module.exports = router;
