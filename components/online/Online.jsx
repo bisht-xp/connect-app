@@ -1,9 +1,11 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import noAvatar from "../../public/assets/person/noAvatar.png";
 
 export default function Online({ onlineUsers }) {
+  const router = useRouter();
   const [friends, setFriends] = useState([]);
   const [onlineFriends, setOnlineFriends] = useState([]);
   const { auth } = useAuth();
@@ -20,13 +22,32 @@ export default function Online({ onlineUsers }) {
     setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
   }, [friends, onlineUsers]);
 
-  
+  const messageClick = async (user) => {
+    try {
+      const res = await axios.get(
+        `/api/conversations/find/${auth.user._id}/${user._id}`
+      );
+      if (!res.data) {
+        const newConversation = {
+          senderId: auth.user._id,
+          receiverId: user._id,
+        };
+        await axios.post(`/api/conversations/`, newConversation);
+      }
+      router.push("/messages");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
       {onlineFriends.map((friend) => (
         <li key={friend?._id}>
-          <div className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer">
+          <div
+            onClick={() => messageClick(friend)}
+            className="flex items-center space-x-4 p-2 hover:bg-gray-200 dark:hover:bg-dark-third dark:text-dark-txt rounded-lg cursor-pointer"
+          >
             <div className="relative ">
               <img
                 src={friend.profilePicture || noAvatar}

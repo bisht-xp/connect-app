@@ -17,10 +17,23 @@ import { useRouter } from "next/router";
 import { useAuth } from "../../context/AuthContext";
 import noAvatar from "../../public/assets/person/noAvatar.png";
 import SignOut from "../logout/Logout";
+import { useState } from "react";
+import SearchModal from "../serchModal/SearchModal";
 
 export default function Topbar() {
   const { auth } = useAuth();
   const router = useRouter();
+
+  const [search, setSearch] = useState(false);
+
+  const clickHandler = () => {
+    setSearch(true);
+  };
+
+  const searchClose = () => {
+    setSearch(false);
+  };
+
   return (
     <>
       <nav className="bg-white dark:bg-dark-second h-max md:h-14 w-full shadow flex flex-col md:flex-row items-center justify-center md:justify-between fixed top-0 z-50 border-b dark:border-dark-third">
@@ -36,12 +49,12 @@ export default function Topbar() {
           </Link>
           <div className="flex items-center justify-between space-x-1">
             <div className="relative bg-gray-100 dark:bg-dark-third px-2 py-2 w-10 h-10 sm:w-11 sm:h-11 lg:h-10 lg:w-10 xl:w-max xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer">
-              <Search />
-              <input
+              <Search onClick={clickHandler} />
+              {/* <input
                 type="text"
                 placeholder="Search Facebook"
                 className="outline-none bg-transparent hidden xl:inline-block"
-              />
+              /> */}
             </div>
             <div className="text-2xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt">
               <DarkMode />
@@ -52,7 +65,13 @@ export default function Topbar() {
           </div>
         </div>
         <ul className="flex w-full lg:w-max items-center justify-center">
-          <li className={router.asPath == "/"? `w-1/5 md:w-max text-center text-blue-500`: "w-1/5 md:w-max text-center"}>
+          <li
+            className={
+              router.asPath == "/"
+                ? `w-1/5 md:w-max text-center text-blue-500`
+                : "w-1/5 md:w-max text-center"
+            }
+          >
             <Link
               href="/"
               className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block  border-b-4 "
@@ -60,7 +79,13 @@ export default function Topbar() {
               <Home />
             </Link>
           </li>
-          <li className={router.asPath == "/messages"? `w-1/5 md:w-max text-center text-blue-500`: "w-1/5 md:w-max text-center"}>
+          <li
+            className={
+              router.asPath == "/messages"
+                ? `w-1/5 md:w-max text-center text-blue-500`
+                : "w-1/5 md:w-max text-center"
+            }
+          >
             <Link
               href="/messages"
               className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
@@ -151,6 +176,7 @@ export default function Topbar() {
         </ul>
         {/* <!-- END RIGHT NAV --> */}
       </nav>
+      {search && <SearchModal outSideClick={searchClose} />}
     </>
   );
 }
