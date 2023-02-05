@@ -47,9 +47,14 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
+  const onPostClick = () => {
+    setDropDown(true);
+  }
+
   const postHandler = () => {
-    setDropDown(!dropDown);
+    setDropDown(false);
   };
+
 
   return (
     <>
@@ -80,9 +85,9 @@ export default function Post({ post }) {
             </div>
           </div>
           <div className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer">
-            <MoreVert onClick={postHandler} />
+            <MoreVert onClick={onPostClick} />
             <div className="relative">
-              {dropDown && <PostModal post={post} />}
+              {dropDown && <PostModal post={post} clickOutSide={postHandler}/>}
             </div>
           </div>
         </div>
