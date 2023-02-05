@@ -146,25 +146,25 @@ export default function messages({ conversationData }) {
                     <div className="flex flex-row items-center p-4">
                       <button
                         type="button"
-                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className=" hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <AddCircle />
                       </button>
                       <button
                         type="button"
-                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className=" hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <Photo />
                       </button>
                       <button
                         type="button"
-                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className=" hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <PhotoCamera />
                       </button>
                       <button
                         type="button"
-                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className=" hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <Mic />
                       </button>
@@ -190,7 +190,7 @@ export default function messages({ conversationData }) {
                       </div>
                       <button
                         type="button"
-                        className="flex hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
+                        className=" hidden md:block flex-shrink-0 focus:outline-none mx-2 text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
                         <ThumbUp />
                       </button>
@@ -211,6 +211,14 @@ export default function messages({ conversationData }) {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
+  if (!req.user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
   const getConversation = await axios.get(
     `http://localhost:3000/api/conversations/${req.user._id}`
   );
