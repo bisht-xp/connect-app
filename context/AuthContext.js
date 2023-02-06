@@ -8,7 +8,6 @@ export const getUser = async ({ req, res }) => {
   // console.log("req.user: ", req.user);
   try {
     if (req.user) {
-      // console.log(response.data);
       return { status: "SIGNED_IN", user: req.user };
     } else {
       return { status: "SIGNED_OUT", user: null };
@@ -16,19 +15,6 @@ export const getUser = async ({ req, res }) => {
   } catch (err) {
     return { status: "SIGNED_OUT", user: null };
   }
-  //   console.log("req.user from frontedn", req.user);
-  //   return await axios
-  //   .get(`http://localhost:3000/api/user/session`)
-  //   .then((response) => {
-  //     if (response.data) {
-  //       return { status: 'SIGNED_IN', user: response.data };
-  //     } else {
-  //       return { status: 'SIGNED_OUT', user: null };
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     return { status: 'SIGNED_OUT', user: null };
-  //   });
 };
 
 export const AuthProvider = (props) => {
@@ -46,11 +32,10 @@ export const AuthProvider = (props) => {
     })
       .then((response) => {
         router.push("/");
-        console.log("user signed in");
-        // return { status: "SIGNED_IN", user: response.data };
+       
       })
       .catch((error) => {
-        console.error("Incorrect email or password entered.");
+        return "Incorrect email or password entered.";
       });
   };
 
@@ -63,10 +48,10 @@ export const AuthProvider = (props) => {
     })
       .then(function (response) {
         router.push("/");
-        console.log("user registered");
+        
       })
-      .catch(function (error) {
-        console.error(error.message);
+      .catch((error) => {
+        return "User already exits.";
       });
   };
 
@@ -78,7 +63,7 @@ export const AuthProvider = (props) => {
         console.log("user logged out");
       })
       .catch((error) => {
-        console.error(error.message);
+        return "Internal server error!!"
       });
   };
   return (
