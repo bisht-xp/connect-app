@@ -59,13 +59,13 @@ export default function ProfileInfo({ user }) {
     <>
       <div>
         <div className="relative w-full h-48">
-          <Image
+          <img
             className="w-full h-48 object-cover"
-            src={user.coverPicture?.url || noCover}
+            src={
+              user.coverPicture?.url ||
+              "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noCover_t7bquw.png"
+            }
             alt="cover Picture"
-            layout="fill"
-            objectFit="cover"
-            priority
           />
         </div>
         <div className="p-4">
@@ -74,13 +74,13 @@ export default function ProfileInfo({ user }) {
             <div className="flex flex-1">
               <div className="-mt-24">
                 <div className="rounded-full relative w-32 h-32">
-                  <Image
+                  <img
                     className="md rounded-full border-4 border-gray-900"
-                    src={user.profilePicture?.url || noAvatar}
+                    src={
+                      user.profilePicture?.url ||
+                      "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+                    }
                     alt="profile picture"
-                    layout="fill"
-                    objectFit="cover"
-                    priority
                   />
                   <div className="absolute"></div>
                 </div>

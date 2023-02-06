@@ -32,7 +32,7 @@ export default function Conversation({
         <div className="w-16 h-16 relative flex flex-shrink-0">
           <Image
             className="shadow-md rounded-full w-full h-full object-cover"
-            src={user.profilePicture?.url || avatar}
+            src={user.profilePicture?.url || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
             layout="fill"
             alt={user.username}
           />

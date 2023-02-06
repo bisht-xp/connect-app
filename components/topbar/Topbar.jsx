@@ -143,7 +143,7 @@ export default function Topbar() {
             >
               <Image
                 className="h-7 w-7 rounded-full object-cover"
-                src={auth.user.profilePicture?.url || noAvatar}
+                src={auth.user.profilePicture?.url || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
                 width={28}
                 height={28}
                 alt={auth.user.username || "image"}
