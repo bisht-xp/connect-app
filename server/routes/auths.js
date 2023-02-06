@@ -13,8 +13,9 @@ router.route("/register").post(async (req, res) => {
     await registeredUser.save();
 
     res.json("user Added!!");
-  } catch (e) {
-    res.status(400).json("Error: " + e);
+  } catch (err) {
+    // console.log(err.response);
+    res.status(500).json(err);
   }
 });
 
