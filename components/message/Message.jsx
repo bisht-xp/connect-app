@@ -6,6 +6,7 @@ import avatar from "../../public/assets/person/noAvatar.png";
 
 export default function Message({ currentChat }) {
   const [user, setUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState([]);
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Message({ currentChat }) {
         const res = await axios(`/api/user?userId=${friendId}`);
         setUser(res.data);
       } catch (err) {
-        console.log(err);
+        setErrorMessage(err);
       }
     };
     getUser();

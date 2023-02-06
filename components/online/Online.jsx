@@ -7,6 +7,7 @@ export default function Online({ onlineUsers }) {
   const router = useRouter();
   const [friends, setFriends] = useState([]);
   const [onlineFriends, setOnlineFriends] = useState([]);
+  const [errorMessage, setErrorMessage] = useState([]);
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function Online({ onlineUsers }) {
       }
       router.push("/messages");
     } catch (err) {
-      console.log(err);
+      setErrorMessage(err);
     }
   };
 

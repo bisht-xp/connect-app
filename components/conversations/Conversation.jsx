@@ -10,6 +10,7 @@ export default function Conversation({
   messages,
 }) {
   const [user, setUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   // const [onlineFriends, setOnlineFriends] = useState([]);
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser._id);
@@ -18,7 +19,7 @@ export default function Conversation({
         const res = await axios(`/api/user?userId=${friendId}`);
         setUser(res.data);
       } catch (err) {
-        console.log(err);
+        setErrorMessage(err.response.data);
       }
     };
     getUser();

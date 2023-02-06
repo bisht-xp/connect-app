@@ -11,6 +11,7 @@ import UpdateModal from "../updateModal/UpdateModal";
 export default function ProfileInfo({ user }) {
   const router = useRouter();
   const { auth } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [editModal, setEditModal] = useState(false);
   const [followed, setFollowed] = useState(
@@ -30,7 +31,7 @@ export default function ProfileInfo({ user }) {
       }
       setFollowed(!followed);
     } catch (err) {
-      console.log(err);
+      setErrorMessage("Internal server Error!");
     }
   };
   const closeAndOutSideHandler = () => {
@@ -51,7 +52,7 @@ export default function ProfileInfo({ user }) {
       }
       router.push("/messages");
     } catch (err) {
-      console.log(err);
+      setErrorMessage("Internal server Error!");
     }
   };
 

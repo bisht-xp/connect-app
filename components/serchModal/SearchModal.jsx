@@ -10,6 +10,7 @@ export default function SearchModal(props) {
   const [allUser, setAllUser] = useState([]);
   const [query, setQuery] = useState("");
   const [filterData, setFilterData] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const getUsers = async () => {
@@ -17,7 +18,7 @@ export default function SearchModal(props) {
         const res = await axios.get(`/api/user/alluser`);
         setAllUser(res.data);
       } catch (err) {
-        console.log(err.response);
+        setErrorMessage("Internal server Error!");
       }
     };
     getUsers();
