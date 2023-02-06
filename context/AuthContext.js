@@ -60,7 +60,7 @@ export const AuthProvider = (props) => {
       .get(`http://localhost:3000/api/auth/logout`, { withCredentials: true })
       .then(() => {
         router.push("/login");
-        console.log("user logged out");
+        // console.log("user logged out");
       })
       .catch((error) => {
         return "Internal server error!!"
