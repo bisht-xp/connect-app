@@ -14,6 +14,7 @@ export default function Post({ post }) {
   const [dropDown, setDropDown] = useState(false);
   const [user, setUser] = useState({});
   const [hydrated, setHydrated] = useState(false);
+  const [errorMessage,setErrorMessage] = useState(""); 
 
   const { auth } = useAuth();
 
@@ -41,7 +42,7 @@ export default function Post({ post }) {
     try {
       await axios.put(`/api/post/${post._id}/like`, { userId: auth.user._id });
     } catch (err) {
-      console.log(err);
+      setErrorMessage("likes error");
     }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -49,12 +50,11 @@ export default function Post({ post }) {
 
   const onPostClick = () => {
     setDropDown(true);
-  }
+  };
 
   const postHandler = () => {
     setDropDown(false);
   };
-
 
   return (
     <>
@@ -70,7 +70,10 @@ export default function Post({ post }) {
               <Link href={`/profile/${user.username}`}>
                 <Image
                   className="w-10 h-10 rounded-full object-cover"
-                  src={user.profilePicture?.url || avatar}
+                  src={
+                    user.profilePicture?.url ||
+                    "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+                  }
                   width={40}
                   height={40}
                   alt="image"
@@ -87,7 +90,7 @@ export default function Post({ post }) {
           <div className="w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer">
             <MoreVert onClick={onPostClick} />
             <div className="relative">
-              {dropDown && <PostModal post={post} clickOutSide={postHandler}/>}
+              {dropDown && <PostModal post={post} clickOutSide={postHandler} />}
             </div>
           </div>
         </div>

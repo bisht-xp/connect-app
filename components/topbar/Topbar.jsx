@@ -15,7 +15,6 @@ import {
 import { Badge } from "@mui/material";
 import { useRouter } from "next/router";
 import { useAuth } from "../../context/AuthContext";
-import noAvatar from "../../public/assets/person/noAvatar.png";
 import SignOut from "../logout/Logout";
 import { useState } from "react";
 import SearchModal from "../serchModal/SearchModal";

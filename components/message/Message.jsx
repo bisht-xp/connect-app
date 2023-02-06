@@ -28,14 +28,14 @@ export default function Message({ currentChat }) {
           <div className="w-12 h-12 mr-4 relative flex flex-shrink-0">
             <Image
               className="shadow-md rounded-full w-full h-full object-cover"
-              src={user.profilePicture || avatar}
+              src={user.profilePicture || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
               alt={user.username || "name"}
               layout="fill"
             />
           </div>
           <div className="text-sm">
             <p className="font-bold">{user.username}</p>
-            <p>Active 1h ago</p>
+            {/* <p>Active 1h ago</p> */}
           </div>
         </div>
       </div>

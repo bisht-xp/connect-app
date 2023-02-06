@@ -1,7 +1,6 @@
 import axios from "axios";
 import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
-import avatar from "../../public/assets/person/noAvatar.png";
 import { format } from "timeago.js";
 
 export default function Conversation({

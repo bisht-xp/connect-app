@@ -22,7 +22,7 @@ export default function LeftMenu() {
               /> */}
               <Image
                 className="w-10 h-10 rounded-full object-cover "
-                src={auth.user.profilePicture?.url || noAvatar}
+                src={auth.user.profilePicture?.url || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
                 width={40}
                 height={40}
                 alt={auth.user.username || "image"}

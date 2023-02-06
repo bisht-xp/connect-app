@@ -88,7 +88,7 @@ export default function SearchModal(props) {
                             <div className="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
                               <span className=" m-1 rounded-full">
                                 <img
-                                  src={data.profilePicture?.url}
+                                  src={data.profilePicture?.url || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
                                   className="w-8 h-8 rounded-full"
                                 />
                               </span>

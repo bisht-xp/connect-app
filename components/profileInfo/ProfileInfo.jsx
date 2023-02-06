@@ -63,7 +63,7 @@ export default function ProfileInfo({ user }) {
             className="w-full h-48 object-cover"
             src={
               user.coverPicture?.url ||
-              "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noCover_t7bquw.png"
+              "https://res.cloudinary.com/dakwu85pd/image/upload/v1675660519/connect/A_very_warm_welcome_grfovc.png"
             }
             alt="cover Picture"
           />
@@ -75,7 +75,7 @@ export default function ProfileInfo({ user }) {
               <div className="-mt-24">
                 <div className="rounded-full relative w-32 h-32">
                   <img
-                    className="md rounded-full border-4 border-gray-900"
+                    className="md rounded-full border-4 border-gray-900 w-32 h-32 object-cover"
                     src={
                       user.profilePicture?.url ||
                       "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"

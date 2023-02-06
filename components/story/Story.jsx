@@ -1,7 +1,6 @@
 import { AddCircle, ChevronRight } from "@mui/icons-material";
 import Image from "next/legacy/image";
 import { useAuth } from "../../context/AuthContext";
-import noAvatar from "../../public/assets/person/noAvatar.png";
 
 export default function Story() {
   const { auth } = useAuth();
@@ -12,16 +11,17 @@ export default function Story() {
           <div className="relative h-full group cursor-pointer">
             <Image
               className="group-hover:transform group-hover:scale-110 transition-all duration-700 "
-              src={auth.user.profilePicture?.url || noAvatar}
+              src={
+                auth.user.profilePicture?.url ||
+                "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+              }
               layout="fill"
               objectFit="cover"
               alt={auth.user.username || "image"}
             />
           </div>
           <div className="flex-1 relative flex items-end justify-center pb-2 text-center leading-none dark:bg-dark-second dark:text-dark-txt">
-            <span className="font-semibold bottom">
-              Create a  Story
-            </span>
+            <span className="font-semibold bottom">Create a Story</span>
             <div className="w-10 h-10 rounded-full bg-blue-500 text-white grid place-items-center text-2xl border-4 border-white dark:border-dark-second absolute -top-5 left-1/2 transform -translate-x-1/2">
               <AddCircle />
             </div>
@@ -42,7 +42,10 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture?.url || noAvatar}
+                src={
+                  auth.user.profilePicture?.url ||
+                  "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+                }
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"
@@ -65,7 +68,10 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture?.url || noAvatar}
+                src={
+                  auth.user.profilePicture?.url ||
+                  "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+                }
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"
@@ -88,7 +94,10 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture?.url || noAvatar}
+                src={
+                  auth.user.profilePicture?.url ||
+                  "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+                }
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"
@@ -111,7 +120,10 @@ export default function Story() {
             </span>
             <div className="w-10 h-10 rounded-full overflow-hidden absolute top-2 left-2 border-4 border-blue-500">
               <Image
-                src={auth.user.profilePicture?.url || noAvatar}
+                src={
+                  auth.user.profilePicture?.url ||
+                  "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+                }
                 alt="Profile picture"
                 layout="fill"
                 objectFit="cover"

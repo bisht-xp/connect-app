@@ -2,7 +2,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import noAvatar from "../../public/assets/person/noAvatar.png";
 
 export default function Online({ onlineUsers }) {
   const router = useRouter();
@@ -50,7 +49,7 @@ export default function Online({ onlineUsers }) {
           >
             <div className="relative ">
               <img
-                src={friend.profilePicture || noAvatar}
+                src={friend.profilePicture || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
                 alt="Friends profile picture"
                 className="w-12 h-12 rounded-full object-cover"
               />

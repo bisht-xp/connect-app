@@ -6,7 +6,6 @@ import {
   Cancel,
 } from "@mui/icons-material";
 import Image from "next/legacy/image";
-import noAvatar from "../../public/assets/person/noAvatar.png";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
@@ -17,6 +16,7 @@ export default function Share() {
   const router = useRouter();
   const desc = useRef();
   const [file, setFile] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -28,9 +28,10 @@ export default function Share() {
       // window.location.reload();
       router.replace(router.asPath);
       setFile(null);
+      setErrorMessage("");
       desc.current.value = "";
     } catch (err) {
-      console.log(err.response);
+      setErrorMessage("Image is missing!");
     }
   };
   // md:min-w-min rounded-xl shadow-lg bg-white
@@ -38,10 +39,16 @@ export default function Share() {
     <>
       <div className="px-4 mt-4 shadow rounded-lg bg-white dark:bg-dark-second">
         <div className="p-3">
+          {errorMessage && (
+            <p className="text-lg text-red-500 ">{errorMessage}</p>
+          )}
           <div className="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4 mb-3">
             <Image
               className="rounded-full object-cover"
-              src={auth.user.profilePicture?.url || noAvatar}
+              src={
+                auth.user.profilePicture?.url ||
+                "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"
+              }
               alt={auth.user.username || "image"}
               width={56}
               height={56}
