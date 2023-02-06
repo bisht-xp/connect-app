@@ -1,11 +1,13 @@
 import Head from "next/head";
 import { JoinFull } from "@mui/icons-material";
 // import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import Link from "next/link";
 
 export default function register() {
   const { register } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -16,12 +18,14 @@ export default function register() {
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("Passwords don't match!");
     } else {
-      register(
+      const error = await register(
         username.current.value,
         email.current.value,
         password.current.value
       );
+      setErrorMessage(error);
     }
+    // console.log(errorMessage);
   };
 
   return (
@@ -48,6 +52,9 @@ export default function register() {
               onSubmit={submitHandler}
               className="w-80 h-96 p-5 bg-white rounded-xl flex flex-col justify-between"
             >
+              {errorMessage && (
+                <p className="text-sm text-red-500 ">{errorMessage}</p>
+              )}
               <input
                 placeholder="Username"
                 required
@@ -81,9 +88,11 @@ export default function register() {
               <button className="h-12 rounded-xl border-none bg-blue-600 text-white text-xl font-roboto font-medium cursor-pointer">
                 Sign Up
               </button>
-              <button className="w-4/5  self-center h-12 rounded-xl bg-green-600 text-white font-roboto font-medium text-xl cursor-pointer">
-                Log into Account
-              </button>
+              <Link href={"/login"} className="w-4/5 flex justify-center self-center h-12 rounded-xl bg-green-600 text-white font-roboto font-medium text-xl cursor-pointer">
+                <button >
+                  Log into Account
+                </button>
+              </Link>
             </form>
           </div>
         </div>
