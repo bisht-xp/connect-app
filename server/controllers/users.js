@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const { cloudinary } = require("../cloudinary/index");
 
 module.exports.updateUser = async (req, res) => {
   try {
@@ -14,14 +15,20 @@ module.exports.updateUser = async (req, res) => {
       user.relationship = req.body.relationship;
     }
     if (req.files.profile) {
-      console.log("profilePicture", req.files.profile[0]);
+      // console.log("profilePicture", req.files.profile[0]);
+      if(user.profilePicture) {
+        await cloudinary.uploader.destroy(user.profilePicture.filename);
+      }
       user.profilePicture = {
         url: req.files.profile[0].path,
         filename: req.files.profile[0].filename,
       };
     }
     if (req.files.coverPicture) {
-      console.log("CoverPicture", req.files.coverPicture[0]);
+      // console.log("CoverPicture", req.files.coverPicture[0]);
+      if(user.coverPicture) {
+        await cloudinary.uploader.destroy(user.coverPicture.filename);
+      }
       user.coverPicture = {
         url: req.files.coverPicture[0].path,
         filename: req.files.coverPicture[0].filename,
