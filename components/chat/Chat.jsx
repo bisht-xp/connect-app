@@ -10,13 +10,6 @@ export default function Chat({ message, own }) {
           : "flex flex-row justify-start mt-2 mb-3"
       }
     >
-      {/* <div className="w-8 h-8 relative flex flex-shrink-0 mr-4">
-        <img
-          className="shadow-md rounded-full w-full h-full object-cover"
-          src="https://randomuser.me/api/portraits/women/33.jpg"
-          alt=""
-        />
-      </div> */}
       <div
         className={`messages text-sm grid grid-flow-row gap-2 ${
           own ? `text-white` : `text-gray-700`

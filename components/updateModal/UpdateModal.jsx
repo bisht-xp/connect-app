@@ -25,11 +25,8 @@ export default function UpdateModal(props) {
     // console.log(formData.value);
     try {
       const res = await axios.put(`/api/user/${auth.user._id}`, formData);
-      // console.log(res.data);
-      // desc.current.value={}
       setCoverFile(null);
       setProfileFile(null);
-      console.log(res.data);
     } catch (err) {
       console.log(err.response);
     }
