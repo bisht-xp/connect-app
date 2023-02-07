@@ -25,6 +25,9 @@ const authRouter = require("./routes/auths");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 
+//mongodb-connect
+const MongoStore = require("connect-mongo");
+
 //Part of server connection
 const dev = process.env.NODE_DEV !== "production";
 const PORT = 3000; //process.env.PORT || 3000
@@ -32,10 +35,15 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler(); //part of next config
 
 // mongoose connections  configration
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/social-app";
+// console.log(dbUrl);
 mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://localhost:27017/social-app", (err) => {
-  if (err) console.log(err);
-  else console.log("mongdb is connected");
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+});
+const connection = mongoose.connection;
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
 });
 
 nextApp.prepare().then(() => {
@@ -45,7 +53,14 @@ nextApp.prepare().then(() => {
   app.use(express.urlencoded({ extended: true }));
 
   //session config
+  const store = new MongoStore({
+    mongoUrl: dbUrl,
+    secret: "thisshouldbeabettersecret#!",
+    touchAfter: 24 * 60 * 60,
+  });
+
   const sessionConfig = {
+    store,
     secret: "thisshouldbeabettersecret#!",
     resave: false,
     saveUninitialized: true,
