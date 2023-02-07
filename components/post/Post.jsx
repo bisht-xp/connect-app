@@ -14,7 +14,7 @@ export default function Post({ post }) {
   const [dropDown, setDropDown] = useState(false);
   const [user, setUser] = useState({});
   const [hydrated, setHydrated] = useState(false);
-  const [errorMessage,setErrorMessage] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { auth } = useAuth();
 
@@ -120,12 +120,12 @@ export default function Post({ post }) {
         <div className="py-2 px-4">
           <div className="border border-gray-200 dark:border-dark-third border-l-0 border-r-0 py-1">
             <div className="flex space-x-2">
-              <div className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
+              <div
+                onClick={likeHandler}
+                className="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt"
+              >
                 {/* <span className={isLiked? "text-red-500": null}> */}
-                <Favorite
-                  onClick={likeHandler}
-                  className={isLiked ? "text-red-500" : null}
-                />
+                <Favorite className={isLiked ? "text-red-500" : null} />
                 {/* </span> */}
                 <span className="text-sm font-semibold">Like</span>
               </div>
