@@ -5,24 +5,28 @@ import {
 } from "@mui/icons-material";
 import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import OutsideClickHandler from "react-outside-click-handler";
+import { useRouter } from "next/router";
 
 export default function PostModal({ post, clickOutSide}) {
   const { auth } = useAuth();
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState();
   const clickHandler = async () => {
     // const postUser = { currentUserId: auth.user._id };
     try {
-      const res = await axios.delete(`/api/post/${post._id}`, {
+      await axios.delete(`/api/post/${post._id}`, {
         data: {
           currentUserId: auth.user._id,
         },
       });
-      console.log(res.data);
+      router.replace(router.asPath);
     } catch (err) {
-      console.log(err);
+      setErrorMessage("Internal server error!!");
     }
+    clickOutSide();
   };
 
   const outSideClick = () => {

@@ -30,6 +30,7 @@ export default function UpdateModal(props) {
     } catch (err) {
       console.log(err.response);
     }
+    props.closeHandler();
   };
 
   const clickHandler = () => {

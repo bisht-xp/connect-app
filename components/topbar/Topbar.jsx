@@ -89,7 +89,7 @@ export default function Topbar() {
               href="/messages"
               className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
             >
-              <Badge badgeContent={8} color="error">
+              <Badge badgeContent={null} color="error">
                 <Message />
               </Badge>
             </Link>
@@ -117,7 +117,7 @@ export default function Topbar() {
               href="#"
               className="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative"
             >
-              <Badge badgeContent={100} color="error">
+              <Badge badgeContent={null} color="error">
                 <ViewComfy />
               </Badge>
             </Link>
@@ -154,7 +154,7 @@ export default function Topbar() {
           </li>
           <li>
             <div className="xl:grid hidden place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
-              <Badge badgeContent={9} color="error">
+              <Badge badgeContent={null} color="error">
                 <CircleNotifications />
               </Badge>
             </div>
