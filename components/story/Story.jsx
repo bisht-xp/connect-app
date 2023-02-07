@@ -31,7 +31,7 @@ export default function Story() {
           <div className="relative h-full group cursor-pointer">
             <Image
               className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
-              src="/assets/post/1.jpeg"
+              src="https://res.cloudinary.com/dakwu85pd/image/upload/v1675770235/connect/eugene-golovesov-A_Q6mjGxuyU-unsplash_shny2h.jpg"
               layout="fill"
               objectFit="cover"
               alt="Story images"
@@ -57,7 +57,7 @@ export default function Story() {
           <div className="relative h-full group cursor-pointer">
             <Image
               className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
-              src="/assets/post/1.jpeg"
+              src="https://res.cloudinary.com/dakwu85pd/image/upload/v1675770249/connect/khaled-ali-QZ0qSINQ6TA-unsplash_h7cm2z.jpg"
               layout="fill"
               objectFit="cover"
               alt="Story images"
@@ -83,7 +83,7 @@ export default function Story() {
           <div className="relative h-full group cursor-pointer">
             <Image
               className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
-              src="/assets/post/1.jpeg"
+              src="https://res.cloudinary.com/dakwu85pd/image/upload/v1675770232/connect/simon-pallard-66stSFq463o-unsplash_swjlz2.jpg"
               layout="fill"
               objectFit="cover"
               alt="Story images"
@@ -109,7 +109,7 @@ export default function Story() {
           <div className="relative h-full group cursor-pointer">
             <Image
               className="group-hover:transform group-hover:scale-110 transition-all duration-700 h-full w-full"
-              src="/assets/post/1.jpeg"
+              src="https://res.cloudinary.com/dakwu85pd/image/upload/v1675770232/connect/griffin-wooldridge-QoGufxiLI1g-unsplash_j8p10x.jpg"
               layout="fill"
               objectFit="cover"
               alt="Story images"

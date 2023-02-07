@@ -2,7 +2,7 @@ import axios from "axios";
 import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import avatar from "../../public/assets/person/noAvatar.png";
+
 
 export default function Message({ currentChat }) {
   const [user, setUser] = useState({});

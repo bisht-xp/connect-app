@@ -1,6 +1,3 @@
-import Image from "next/legacy/image";
-import noCover from "../../public/assets/person/noCover.png";
-import noAvatar from "../../public/assets/person/noAvatar.png";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 import axios from "axios";

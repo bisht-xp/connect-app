@@ -4,7 +4,6 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 import axios from "axios";
 import { format } from "timeago.js";
-import avatar from "../../public/assets/person/noAvatar.png";
 import { useAuth } from "../../context/AuthContext";
 import PostModal from "../postModal/PostModal";
 

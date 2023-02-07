@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/legacy/image";
 import { useAuth } from "../../context/AuthContext";
-import noAvatar from "../../public/assets/person/noAvatar.png";
 import { AccessTime, ExpandMore, Flag, Group, Groups } from "@mui/icons-material";
 
 export default function LeftMenu() {
