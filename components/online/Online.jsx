@@ -50,7 +50,7 @@ export default function Online({ onlineUsers }) {
           >
             <div className="relative ">
               <img
-                src={friend.profilePicture || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
+                src={friend.profilePicture?.url || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
                 alt="Friends profile picture"
                 className="w-12 h-12 rounded-full object-cover"
               />

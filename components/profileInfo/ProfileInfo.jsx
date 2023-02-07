@@ -30,6 +30,7 @@ export default function ProfileInfo({ user }) {
         });
       }
       setFollowed(!followed);
+      router.replace(router.asPath);
     } catch (err) {
       setErrorMessage("Internal server Error!");
     }

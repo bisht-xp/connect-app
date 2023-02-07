@@ -39,13 +39,16 @@ export default function SearchModal(props) {
     }
   };
 
+  const searchClick = () => {
+    props.outSideClick();
+  }
+
   const clickHandler = () => {
     setQuery("");
     setFilterData([]);
     props.outSideClick();
   };
 
-  console.log(filterData);
   return (
     <>
       <div className="fixed  z-50  w-full h-full outline-none overflow-x-hidden overflow-y-auto">
@@ -85,12 +88,13 @@ export default function SearchModal(props) {
                           <Link
                             href={`/profile/${data.username}`}
                             key={data._id}
+                            onClick={searchClick}
                           >
                             <div className="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
                               <span className=" m-1 rounded-full">
                                 <img
                                   src={data.profilePicture?.url || "https://res.cloudinary.com/dakwu85pd/image/upload/v1675658082/connect/noAvatar_o4dszs.png"}
-                                  className="w-8 h-8 rounded-full"
+                                  className="w-8 h-8 rounded-full object-cover"
                                 />
                               </span>
                               <div className="flex-grow font-medium px-2 py-2">
